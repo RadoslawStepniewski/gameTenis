@@ -21,12 +21,42 @@
     const cw = canvas.width;
     const ch = canvas.height;
 
+    const ballSize = 20;
+    let ballX = cw / 2 - ballSize / 2;
+    let ballY = ch / 2 - ballSize / 2;
+
+    const ph = 100; // paddelHeight
+    const pw = 20; //paddelWidth
+
+    const playerX = 75;
+    let playerY = 310;
+
+    const computerAiX = 1105;
+    let computerAiY = 310;
+
+    function ball() {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(ballX, ballY, ballSize, ballSize);
+    }
+
     function table() {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, cw, ch);
     }
 
-    table()
+    function player() {
+        ctx.fillStyle = '#fd3';
+        ctx.fillRect(playerX , playerY , pw, ph);
+    }
+
+    function computerAi() {
+        ctx.fillStyle = '#d3d';
+        ctx.fillRect(computerAiX , computerAiY , pw, ph);
+    }
+    table();
+    ball();
+    player();
+    computerAi();
 
 </script>
 </body>
