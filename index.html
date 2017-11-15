@@ -21,6 +21,9 @@
     const cw = canvas.width;
     const ch = canvas.height;
 
+    const lineX = 6; //lineWidth
+    const lineY = 16; // lineHeight
+
     const ballSize = 20;
     let ballX = cw / 2 - ballSize / 2;
     let ballY = ch / 2 - ballSize / 2;
@@ -42,6 +45,11 @@
     function table() {
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, cw, ch);
+
+        for(let lineStart = 20; lineStart < ch; lineStart +=30 ){
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(cw / 2 - 3, lineStart , lineX, lineY);
+        }
     }
 
     function player() {
@@ -53,6 +61,7 @@
         ctx.fillStyle = '#d3d';
         ctx.fillRect(computerAiX , computerAiY , pw, ph);
     }
+
     table();
     ball();
     player();
