@@ -73,6 +73,7 @@
     function player() {
         ctx.fillStyle = '#fd3';
         ctx.fillRect(playerX , playerY , pw, ph);
+
     }
 
     function computerAi() {
@@ -80,6 +81,20 @@
         ctx.fillRect(computerAiX , computerAiY , pw, ph);
     }
 
+    topCanvas = canvas.offsetTop;
+    console.log(topCanvas);
+
+    function playerPosition(event) {
+       // console.log("pozycja myszy to" + (event.clientY - topCanvas));
+        playerY = event.clientY - topCanvas - ph / 2;
+    }
+    
+    
+    canvas.addEventListener('mousemove', playerPosition); 
+
+    
+    
+    
     function game() {
 
 
