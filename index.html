@@ -41,7 +41,6 @@
     let ballSpeedY = 1;
 
 
-
     function ball() {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(ballX, ballY, ballSize, ballSize);
@@ -56,6 +55,8 @@
         if (ballX <= 0 || ballX + ballSize >= cw) {
 
             ballSpeedX = -ballSpeedX;
+
+            speedUp();
         }
 
     }
@@ -64,37 +65,102 @@
         ctx.fillStyle = '#000000';
         ctx.fillRect(0, 0, cw, ch);
 
-        for(let lineStart = 20; lineStart < ch; lineStart +=30 ){
+        for (let lineStart = 20; lineStart < ch; lineStart += 30) {
             ctx.fillStyle = '#fff';
-            ctx.fillRect(cw / 2 - 3, lineStart , lineX, lineY);
+            ctx.fillRect(cw / 2 - 3, lineStart, lineX, lineY);
         }
     }
 
     function player() {
         ctx.fillStyle = '#fd3';
-        ctx.fillRect(playerX , playerY , pw, ph);
+        ctx.fillRect(playerX, playerY, pw, ph);
 
     }
 
     function computerAi() {
         ctx.fillStyle = '#d3d';
-        ctx.fillRect(computerAiX , computerAiY , pw, ph);
+        ctx.fillRect(computerAiX, computerAiY, pw, ph);
     }
 
     topCanvas = canvas.offsetTop;
     console.log(topCanvas);
 
     function playerPosition(event) {
-       // console.log("pozycja myszy to" + (event.clientY - topCanvas));
+        // console.log("pozycja myszy to" + (event.clientY - topCanvas));
         playerY = event.clientY - topCanvas - ph / 2;
-    }
-    
-    
-    canvas.addEventListener('mousemove', playerPosition); 
 
-    
-    
-    
+        if (playerY >= ch - ph) {
+            playerY = ch - ph;
+        }
+
+        if (playerY <= 0) {
+            playerY = 0;
+        }
+
+
+//        computerAiY = playerY;
+// 
+
+    }
+
+    function speedUp() {
+
+        if (ballSpeedX > 0 && ballSpeedX < 16) {
+            ballSpeedX += .4;
+
+        } else if (ballSpeedX < 0 && ballSpeedX > -16) {
+            ballSpeedX -= .4;
+        }
+
+
+        if (ballSpeedY > 0 && ballSpeedY < 16) {
+            ballSpeedY += .3;
+
+        } else if (ballSpeedY < 0 && ballSpeedY > -16) {
+            ballSpeedY -= .3;
+        }
+
+
+    }
+
+    function aiPosition() {
+        var middlePaddel = computerAiY + ph / 2;
+
+        var middleBall = ballY + ballSize / 2;
+
+        if (ballX > 600) {
+            if (middlePaddel - middleBall > 200) {
+                computerAiY -= 15;
+            } else if (middlePaddel - middleBall > 50) {
+                computerAiY -= 5
+
+            }
+        } else if (middlePaddel - middleBall < -200) {
+
+            computerAiY += 15;
+        } else if (middlePaddel - middleBall < -50) {
+            computerAiY += 5;
+
+        }
+
+
+
+
+        else if (ballX <= 600 && ballX > 200) {
+            if(middlePaddel - middleBall > 100){
+computerAiY -= 3
+            }else if(middlePaddel - middleBall < -100){
+                computerAiY += 3
+            }
+
+        }
+
+    }
+
+
+    canvas.addEventListener("mousemove", playerPosition);
+
+
     function game() {
 
 
@@ -102,7 +168,9 @@
         ball();
         player();
         computerAi();
+        aiPosition();
     }
+
     setInterval(game, 1000 / 60);
 </script>
 </body>
