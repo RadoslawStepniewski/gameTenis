@@ -4,10 +4,10 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: gray;
     height: 100vh;
-    background-color: #ababab;
-}
 
+}
 canvas{
-    border: 2px solid #ffffff;
+    background-color: black;
 }
