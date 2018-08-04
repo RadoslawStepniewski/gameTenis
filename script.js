@@ -18,6 +18,11 @@ const aiX = 910;
 let playerY = ch / 2;
 let aiY = ch /2;
 
+let lineWidth = 6;
+let lineHeight = 16;
+
+
+
 player = () =>{
     ctx.fillStyle = "yellow";
     ctx.fillRect(playerX,playerY - paddleHeight /2, paddleWidth, paddleHeight)
@@ -38,9 +43,14 @@ ball =() =>{
 table = ()=>{
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, cw, ch);
+
+    for(let linePosition = 20; linePosition < ch; linePosition += 30 ){
+        ctx.fillStyle = "white";
+        ctx.fillRect(cw /2 - lineWidth /2, linePosition, lineWidth, lineHeight )
+    }
 }
 table();
 ball();
 player()
 ai();
-
+// line();
