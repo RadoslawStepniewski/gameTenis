@@ -15,11 +15,14 @@ const paddleWidth = 20;
 const playerX = 70;
 const aiX = 910;
 
-let playerY = ch / 2;
-let aiY = ch /2;
+const playerY = ch / 2;
+const aiY = ch /2;
 
-let lineWidth = 6;
-let lineHeight = 16;
+const lineWidth = 6;
+const lineHeight = 16;
+
+let ballSpeedX = 1;
+let ballSpeedY = 1;
 
 
 
@@ -36,6 +39,17 @@ ai = () => {
 ball =() =>{
     ctx.fillStyle = "red"
     ctx.fillRect(ballX, ballY, ballSize, ballSize)
+    
+    ballX += ballSpeedX
+    ballY += ballSpeedY
+
+    if(ballY <= 0 || ballY + ballSize >= ch){
+        ballSpeedY =- ballSpeedY 
+    }
+    if(ballX + ballSize >= cw || ballX <= 0){
+        ballSpeedX = - ballSpeedX;
+    }
+    
 
 }
 
@@ -49,8 +63,11 @@ table = ()=>{
         ctx.fillRect(cw /2 - lineWidth /2, linePosition, lineWidth, lineHeight )
     }
 }
-table();
-ball();
-player()
-ai();
-// line();
+
+setInterval(game=()=>{
+    table();
+    ball();
+    player()
+    ai();
+
+},1000 / 60)
